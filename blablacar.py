@@ -1,4 +1,6 @@
 import requests
+import datetime
+import time
 import uuid
 import json
 
@@ -136,6 +138,10 @@ class Blablacar:
         return []
 
 
+    def format_date(self, unix_time):
+        return datetime.datetime.fromtimestamp(unix_time).strftime('%Y-%m-%d')
+
+
     def find_trip(self, from_place_id: str = None, to_place_id: str = None, departure_date: str = '', requested_seats: str = '1', passenger_gender: str = 'UNKNOWN') -> list:
         """
             Ищет доступные поездки из города from_place_id в город to_place_id, в дату departure_date, количество мест requested_seats
@@ -210,13 +216,16 @@ class Blablacar:
 
 if __name__ == '__main__':
     blaobject = Blablacar()
+
+    print(blaobject.format_date(time.time()))
+
     result = blaobject.find_city('Москва')
     result2 = blaobject.find_city('Санкт Питербург')
     
     t_result = blaobject.find_trip(
         from_place_id = result[0]['id'],
         to_place_id = result2[0]['id'],
-        departure_date = '2022-11-23',
+        departure_date = blaobject.format_date(time.time()),
         requested_seats = '1',
     )
 
