@@ -138,7 +138,14 @@ class Blablacar:
         return []
 
 
-    def format_date(self, unix_time):
+    def format_date(self, unix_time: float):
+        """
+            Преобразует unix_time в формат даты для блаблакара
+            
+            :param unix_time: float время в формате unixtime
+            :returns: str example 2022-11-23
+        """
+
         return datetime.datetime.fromtimestamp(unix_time).strftime('%Y-%m-%d')
 
 
